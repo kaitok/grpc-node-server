@@ -6,7 +6,8 @@
   "license": "ISC",
   "description": "",
   "workspaces": [
-    "packages/protos"
+    "packages/protos",
+    "services/product-service"
   ],
   "devDependencies": {
     "ts-proto": "^1.181.1",
