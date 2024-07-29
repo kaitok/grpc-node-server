@@ -17,7 +17,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@grpc-node-server/protos": "^1.0.0",
     "@grpc/grpc-js": "^1.11.1",
+    "@grpc/reflection": "^1.0.4",
     "pg": "^8.12.0",
     "reflect-metadata": "^0.2.2",
     "typeorm": "^0.3.20"
