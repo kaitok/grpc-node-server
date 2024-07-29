@@ -5,7 +5,7 @@ import { Server, ServerCredentials } from '@grpc/grpc-js'
 const server = new Server()
 
 const HOST = process.env.HOST || '0.0.0.0'
-const PORT = Number(process.env.PORT) || 50051
+const PORT = Number(process.env.PORT) || 50052
 
 const address = `${HOST}:${PORT}`
 
