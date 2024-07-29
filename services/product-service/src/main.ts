@@ -7,7 +7,7 @@ import { ProductServiceService } from '@grpc-node-server/protos/dist/product/pro
 const server = new Server()
 
 const HOST = process.env.HOST || '0.0.0.0'
-const PORT = Number(process.env.PORT) || 50051
+const PORT = Number(process.env.PORT) || 50052
 
 const address = `${HOST}:${PORT}`
 
