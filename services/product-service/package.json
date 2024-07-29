@@ -19,9 +19,13 @@
   "dependencies": {
     "@grpc-node-server/protos": "^1.0.0",
     "@grpc/grpc-js": "^1.11.1",
+    "@grpc/proto-loader": "^0.7.13",
     "@grpc/reflection": "^1.0.4",
+    "google-protobuf": "^3.21.4",
+    "grpc-node-server-reflection": "^1.0.2",
     "pg": "^8.12.0",
     "reflect-metadata": "^0.2.2",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.20",
+    "yarn": "^1.22.22"
   }
 }
