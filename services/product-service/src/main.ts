@@ -20,10 +20,6 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   enums: String,
   defaults: true,
   oneofs: true,
-  includeDirs: [
-    path.resolve(__dirname, '../../../packages/protos/dist'),
-    path.resolve(__dirname, '../../../packages/protos/src'),
-  ],
 })
 
 const server = new Server()

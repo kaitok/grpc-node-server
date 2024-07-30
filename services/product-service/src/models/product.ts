@@ -22,10 +22,4 @@ export class Product {
 
   @Column('text', { array: true })
   tags!: string[]
-
-  @CreateDateColumn()
-  createdAt!: Date
-
-  @UpdateDateColumn()
-  updatedAt!: Date
 }

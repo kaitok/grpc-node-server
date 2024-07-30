@@ -18,7 +18,6 @@ import {
   type UntypedServiceImplementation,
 } from "@grpc/grpc-js";
 import _m0 from "protobufjs/minimal";
-import { Timestamp } from "../google/protobuf/timestamp";
 
 export const protobufPackage = "product";
 
@@ -28,8 +27,6 @@ export interface Product {
   description: string;
   image: string;
   tags: string[];
-  createdAt: Date | undefined;
-  updatedAt: Date | undefined;
 }
 
 export interface CreateProductRequest {
@@ -59,7 +56,7 @@ export interface ListProductsResponse {
 }
 
 function createBaseProduct(): Product {
-  return { id: 0, name: "", description: "", image: "", tags: [], createdAt: undefined, updatedAt: undefined };
+  return { id: 0, name: "", description: "", image: "", tags: [] };
 }
 
 export const Product = {
@@ -78,12 +75,6 @@ export const Product = {
     }
     for (const v of message.tags) {
       writer.uint32(42).string(v!);
-    }
-    if (message.createdAt !== undefined) {
-      Timestamp.encode(toTimestamp(message.createdAt), writer.uint32(50).fork()).ldelim();
-    }
-    if (message.updatedAt !== undefined) {
-      Timestamp.encode(toTimestamp(message.updatedAt), writer.uint32(58).fork()).ldelim();
     }
     return writer;
   },
@@ -130,20 +121,6 @@ export const Product = {
 
           message.tags.push(reader.string());
           continue;
-        case 6:
-          if (tag !== 50) {
-            break;
-          }
-
-          message.createdAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          continue;
-        case 7:
-          if (tag !== 58) {
-            break;
-          }
-
-          message.updatedAt = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -160,8 +137,6 @@ export const Product = {
       description: isSet(object.description) ? globalThis.String(object.description) : "",
       image: isSet(object.image) ? globalThis.String(object.image) : "",
       tags: globalThis.Array.isArray(object?.tags) ? object.tags.map((e: any) => globalThis.String(e)) : [],
-      createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined,
-      updatedAt: isSet(object.updatedAt) ? fromJsonTimestamp(object.updatedAt) : undefined,
     };
   },
 
@@ -182,12 +157,6 @@ export const Product = {
     if (message.tags?.length) {
       obj.tags = message.tags;
     }
-    if (message.createdAt !== undefined) {
-      obj.createdAt = message.createdAt.toISOString();
-    }
-    if (message.updatedAt !== undefined) {
-      obj.updatedAt = message.updatedAt.toISOString();
-    }
     return obj;
   },
 
@@ -201,8 +170,6 @@ export const Product = {
     message.description = object.description ?? "";
     message.image = object.image ?? "";
     message.tags = object.tags?.map((e) => e) || [];
-    message.createdAt = object.createdAt ?? undefined;
-    message.updatedAt = object.updatedAt ?? undefined;
     return message;
   },
 };
@@ -693,28 +660,6 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
-
-function toTimestamp(date: Date): Timestamp {
-  const seconds = Math.trunc(date.getTime() / 1_000);
-  const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { seconds, nanos };
-}
-
-function fromTimestamp(t: Timestamp): Date {
-  let millis = (t.seconds || 0) * 1_000;
-  millis += (t.nanos || 0) / 1_000_000;
-  return new globalThis.Date(millis);
-}
-
-function fromJsonTimestamp(o: any): Date {
-  if (o instanceof globalThis.Date) {
-    return o;
-  } else if (typeof o === "string") {
-    return new globalThis.Date(o);
-  } else {
-    return fromTimestamp(Timestamp.fromJSON(o));
-  }
-}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

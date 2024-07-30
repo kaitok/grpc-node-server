@@ -2,16 +2,12 @@ syntax = "proto3";
 
 package product;
 
-import "google/protobuf/timestamp.proto";
-
 message Product {
   int32 id = 1;
   string name = 2;
   string description = 3;
   string image = 4;
   repeated string tags = 5;
-  google.protobuf.Timestamp created_at = 6;
-  google.protobuf.Timestamp updated_at = 7;
 }
 
 message CreateProductRequest {
