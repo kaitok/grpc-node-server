@@ -29,12 +29,14 @@ export function getProductServer(db: DataSource): ProductServiceServer {
       console.error(err)
     }
   }
+
   async function getProduct(
     call: ServerUnaryCall<GetProductRequest, GetProductResponse>,
     callback: sendUnaryData<GetProductResponse>
   ) {
     callback({ code: status.UNIMPLEMENTED }, null)
   }
+
   async function listProducts(
     call: ServerUnaryCall<ListProductsRequest, ListProductsResponse>,
     callback: sendUnaryData<ListProductsResponse>
