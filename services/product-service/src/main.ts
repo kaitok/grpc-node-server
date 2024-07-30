@@ -7,13 +7,11 @@ import { ReflectionService } from '@grpc/reflection'
 import * as protoLoader from '@grpc/proto-loader'
 import * as path from 'path'
 
-// プロトコル定義のパス
 const PROTO_PATH = path.resolve(
   __dirname,
   '../../../packages/protos/src/product/product.proto'
 )
 
-// プロトコル定義をロード
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   keepCase: true,
   longs: String,
@@ -23,11 +21,8 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 })
 
 const server = new Server()
-
-// サービスを追加
 server.addService(ProductServiceService, getProductServer(dataSource))
 
-// リフレクションサービスを作成し、サーバーに追加
 const reflection = new ReflectionService(packageDefinition)
 reflection.addToServer(server)
 
